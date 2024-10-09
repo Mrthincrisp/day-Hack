@@ -1,14 +1,17 @@
 'use client';
 
 import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-export default function PeopleCard() {
+export default function PeopleCard({ peopleObj }) {
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
-        {/* <Card.Image variant="top" src="holder.js/100px180?text=Image cap" /> */}
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>Some quick example text to build on the card title and make up the bulk of the cards content.</Card.Text>
+        <Card.Img variant="top" src={peopleObj.picture.medium} />
+        <Card.Title>
+          {peopleObj.name.first} {peopleObj.name.last}
+        </Card.Title>
+        <Card.Text>{peopleObj.location.country}</Card.Text>
       </Card.Body>
       <Card.Body>
         <Card.Link href="#">Card Link</Card.Link>
@@ -16,3 +19,18 @@ export default function PeopleCard() {
     </Card>
   );
 }
+
+PeopleCard.propTypes = {
+  peopleObj: PropTypes.shape({
+    name: PropTypes.shape({
+      first: PropTypes.string,
+      last: PropTypes.string,
+    }),
+    location: PropTypes.shape({
+      country: PropTypes.string,
+    }),
+    picture: PropTypes.shape({
+      medium: PropTypes.string,
+    }),
+  }).isRequired,
+};
