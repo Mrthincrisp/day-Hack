@@ -13,9 +13,7 @@ function Home() {
     };
     const response = await fetch('https://randomuser.me/api/?results=8', main);
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
-    console.log(people);
-    console.log(setPeople);
+    setPeople(jsonResponse.results);
   };
 
   useEffect(() => {
@@ -32,7 +30,9 @@ function Home() {
         margin: '0 auto',
       }}
     >
-      <PeopleCard />
+      {people.map((person) => (
+        <PeopleCard peopleObj={person} />
+      ))}
     </div>
   );
 }
