@@ -1,9 +1,15 @@
 'use client';
 
-import { Card } from 'react-bootstrap';
+import { useState } from 'react';
+import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default function PeopleCard({ peopleObj }) {
+  const [favorite, setFavorite] = useState(false);
+
+  const handleClick = () => {
+    setFavorite((prevState) => !prevState);
+  };
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
@@ -14,7 +20,7 @@ export default function PeopleCard({ peopleObj }) {
         <Card.Text>{peopleObj.location.country}</Card.Text>
       </Card.Body>
       <Card.Body>
-        <Card.Link href="#">Card Link</Card.Link>
+        <Button as="input" type="button" value={favorite ? '+' : '-'} onClick={handleClick} />{' '}
       </Card.Body>
     </Card>
   );
